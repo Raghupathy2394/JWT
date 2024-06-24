@@ -10,6 +10,8 @@ public interface UserServiceImp {
 
 	UserResponse logIn(LogInDto loginDto);
 
+	UserResponse privateApi(String author) throws Exception;
+
 
 	
 }

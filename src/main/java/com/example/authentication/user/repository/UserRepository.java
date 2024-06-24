@@ -9,7 +9,8 @@ import com.example.authentication.user.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
-	User findOneByEmailidIgnoreCaseAndPassword(String emailid, String password);
+	@Query(value="select * from user where emailid=:emailid and password=:password",nativeQuery=true)
+	User findOneByEmailidPassword(String emailid, String password);
 	
 		//User findOneByEmailIgnoreCasePassword(String emailid, String password);
 

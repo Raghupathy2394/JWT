@@ -21,7 +21,7 @@ public class User {
 	private String gender;
 	private String emailid;
 	private String mobileNumber;
-    private String userType=Constant.USER_TYPE.NARMAL;
+    private String userType=Constant.USER_TYPE.NORMAL;
 	private String password;
 	private int loginCount = 0;
 	private boolean isActive;
