@@ -17,15 +17,15 @@ public class Jwtoken {
 	
 	private static long expiryDuration= 60 * 60;
 	
-	public String generateJWT(User user) {
+	public String GenerateJWT(User user) {
 		long milliTime=System.currentTimeMillis();
 		long expiryTime=milliTime + expiryDuration * 1000;
 		Date issuedAt=new Date(milliTime);
 		Date expiryAt=new Date(expiryTime);
-//		Claims claims=Jwts.claims().setIssuer(user.getId().toString())
-//				.setIssuedAt(issuedAt);
+		Claims claims=Jwts.claims().setIssuer(user.getId().toString())
+				.setIssuedAt(issuedAt);
  //       Set JWT claims
-	    Claims claims = Jwts.claims().setIssuer(String.valueOf(user.getId()));
+	  //  Claims claims = Jwts.claims().setIssuer(String.valueOf(user.getId()));
 	    claims.setIssuedAt(issuedAt).setExpiration(expiryAt);
 	    claims.put("type", user.getUserType());
 	    claims.put("name", user.getName());
@@ -38,7 +38,7 @@ public class Jwtoken {
 		try {
 		Jwts.parser().setSigningKey(secret).parseClaimsJws(authorization);
 	} catch(Exception e) {
-		throw new Exception();
+		throw new AccessDeniedException("Access denied message");
 	}
 }
 }

@@ -12,6 +12,7 @@ public interface UserServiceImp {
 
 	UserResponse privateApi(String author) throws Exception;
 
+	
 
 	
 }

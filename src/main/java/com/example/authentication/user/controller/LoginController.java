@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.authentication.user.common.Jwtoken;
 import com.example.authentication.user.common.UserResponse;
 import com.example.authentication.user.dto.LogInDto;
 import com.example.authentication.user.dto.SignupDto;
@@ -19,7 +20,8 @@ public class LoginController {
 	@Autowired
 	UserServiceImp userService;
 	
-	
+	@Autowired
+	Jwtoken jwtToken;
 	
 @PostMapping("/userSignUp")
 public ResponseEntity<UserResponse> signUp(@RequestBody SignupDto signDto){
@@ -33,8 +35,8 @@ public ResponseEntity<UserResponse> logIn(@RequestBody LogInDto loginDto){
 }
 
 @GetMapping("/privateApi")
-public ResponseEntity<UserResponse> privateApi(@RequestHeader(value="authorization",defaultValue="")
- String author) throws Exception{
+public ResponseEntity<UserResponse> privateApi(@RequestHeader(value="authorization",defaultValue="abc")
+String author) throws Exception {
 	UserResponse userResponse=userService.privateApi(author);
 	return ResponseEntity.status(userResponse.getStatus()).body(userResponse);
 }

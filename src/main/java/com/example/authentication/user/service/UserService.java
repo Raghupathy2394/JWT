@@ -72,19 +72,19 @@ public class UserService implements UserServiceImp {
 	@Override
 	public UserResponse privateApi(String author) throws Exception {
 		UserResponse userResponse = new UserResponse();
-	//	String authorization="";
-		if(author == null) {
-			userResponse.setStatus(HttpStatus.BAD_REQUEST.value());
-		userResponse.setData("logIn failed");
-		userResponse.setError("Oops something went wrong");
-		return userResponse;
-	} else	{
-		jwtToken.verify(author);
-		userResponse.setStatus(HttpStatus.OK.value());
-		userResponse.setData("This is Private Api");
-		return userResponse;
-		
+		try {
+	    	jwtToken.verify(author);
+	        userResponse.setStatus(HttpStatus.OK.value());
+	        userResponse.setData("This is Private Api");
+	    } catch (Exception e) {
+	        userResponse.setStatus(HttpStatus.BAD_REQUEST .value());
+	        userResponse.setData("LogIn failed");
+	        userResponse.setError("Oops, something went wrong");
+	    }
+	    
+	    return userResponse;
+	}
 	}
 
-	}
-}
+	
+
