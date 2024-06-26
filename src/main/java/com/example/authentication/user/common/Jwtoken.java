@@ -17,7 +17,7 @@ public class Jwtoken {
 	
 	private static long expiryDuration= 60 * 60;
 	
-	public String GenerateJWT(User user) {
+	public String generateJWT(User user) {
 		long milliTime=System.currentTimeMillis();
 		long expiryTime=milliTime + expiryDuration * 1000;
 		Date issuedAt=new Date(milliTime);
@@ -38,7 +38,7 @@ public class Jwtoken {
 		try {
 		Jwts.parser().setSigningKey(secret).parseClaimsJws(authorization);
 	} catch(Exception e) {
-		throw new AccessDeniedException("Access denied message");
-	}
+		throw new AccessDeniedException("Access denied");
+		}
 }
 }

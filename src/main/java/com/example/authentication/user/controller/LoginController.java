@@ -12,6 +12,7 @@ import com.example.authentication.user.common.Jwtoken;
 import com.example.authentication.user.common.UserResponse;
 import com.example.authentication.user.dto.LogInDto;
 import com.example.authentication.user.dto.SignupDto;
+import com.example.authentication.user.entity.User;
 import com.example.authentication.user.service.UserServiceImp;
 
 @Controller
@@ -35,9 +36,11 @@ public ResponseEntity<UserResponse> logIn(@RequestBody LogInDto loginDto){
 }
 
 @GetMapping("/privateApi")
-public ResponseEntity<UserResponse> privateApi(@RequestHeader(value="authorization",defaultValue="abc")
+public ResponseEntity<UserResponse> privateApi(@RequestHeader
+		(value="authorization",defaultValue="")
 String author) throws Exception {
 	UserResponse userResponse=userService.privateApi(author);
 	return ResponseEntity.status(userResponse.getStatus()).body(userResponse);
 }
+
 }
