@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GlobalException {
 	
-	
-	
 	@ExceptionHandler
 	public ResponseEntity<UserResponse> handleAccessDeniedExceptio(AccessDeniedException e) {
 		UserResponse userResponse=new UserResponse();
 		userResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+		userResponse.setData("Token invalid");
+		userResponse.setError(e.getMessage());
 		return ResponseEntity.status(userResponse.getStatus()).body(userResponse);
 	}
 

@@ -24,12 +24,12 @@ public class LoginController {
 	@Autowired
 	Jwtoken jwtToken;
 	
-@PostMapping("/userSignUp")
+@PostMapping("/signup")
 public ResponseEntity<UserResponse> signUp(@RequestBody SignupDto signDto){
 	UserResponse userResponse=userService.signUp(signDto);
 	return ResponseEntity.status(userResponse.getStatus()).body(userResponse);
 }
-@PostMapping("/userLogin")
+@PostMapping("/login")
 public ResponseEntity<UserResponse> logIn(@RequestBody LogInDto loginDto){
 	UserResponse userResponse=userService.logIn(loginDto);
 	return ResponseEntity.status(userResponse.getStatus()).body(userResponse);
@@ -42,5 +42,4 @@ String author) throws Exception {
 	UserResponse userResponse=userService.privateApi(author);
 	return ResponseEntity.status(userResponse.getStatus()).body(userResponse);
 }
-
 }

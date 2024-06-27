@@ -75,6 +75,7 @@ public class UserService implements UserServiceImp {
 	    	jwtToken.verify(author);
 	        userResponse.setStatus(HttpStatus.OK.value());
 	        userResponse.setData("This is Private Api");
+	       // userResponse.setError("null");
 	    return userResponse;
 	}
 	}
