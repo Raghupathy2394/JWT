@@ -17,7 +17,7 @@ public class Jwtoken {
 	
 	private static long expiryDuration= 60 * 60;
 	
-	public String generateJWT(User user) {
+	public String generateJWT(User user)  {
 		long milliTime=System.currentTimeMillis();
 		long expiryTime=milliTime + expiryDuration * 1000;
 		Date issuedAt=new Date(milliTime);
@@ -29,16 +29,19 @@ public class Jwtoken {
 	    claims.setIssuedAt(issuedAt).setExpiration(expiryAt);
 	    claims.put("type", user.getUserType());
 	    claims.put("name", user.getName());
-	    claims.put("emailid", user.getEmailid());
+	    claims.put("emailId", user.getEmailid());
 	   	return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512,secret)
 	   			.compact();
 	}
-	
-	public void verify(String authorization) throws Exception {
+
+	public Claims verify(String authorization) throws Exception {
 		try {
-		Jwts.parser().setSigningKey(secret).parseClaimsJws(authorization);
-	} catch(Exception e) {
+		Claims claims=Jwts.parser().setSigningKey(secret).parseClaimsJws(authorization).getBody();
+	System.out.println(claims.get("name")); 
+	return claims;
+		} catch(Exception e) {
 		throw new AccessDeniedException("Access denied");
 		}
+		
 }
 }

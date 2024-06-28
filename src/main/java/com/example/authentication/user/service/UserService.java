@@ -37,6 +37,7 @@ public class UserService implements UserServiceImp {
 			userResponse.setStatus(HttpStatus.BAD_REQUEST.value());
 			userResponse.setError("Bad Request");
 			userResponse.setData("No data found");
+			return userResponse;
 		} else {
 			userResponse.setStatus(HttpStatus.OK.value());
 			userResponse.setData(userEntity);
@@ -44,9 +45,10 @@ public class UserService implements UserServiceImp {
 			String token = jwtToken.generateJWT(userEntity);
 			Map<String, Object> data = new HashMap<>();
 			data.put("Access Token", token);
-			userResponse.setData(data);						
+			userResponse.setData(data);		
+			return userResponse;
 		}
-		return userResponse;
+		
 	}
 
 	@Override

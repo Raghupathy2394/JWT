@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.authentication.user.dto.DtoPageStudent;
+import com.example.authentication.user.dto.RequestMeta;
 import com.example.authentication.user.entity.Student;
 import com.example.authentication.user.repository.StudentRepository;
 
@@ -17,6 +18,9 @@ public class StudentService implements StudentServiceImp {
 
 	@Autowired
 	StudentRepository studentRepo;
+	
+	@Autowired
+	RequestMeta requestmeta;
 	
 	///////////////*****************pagination using DTO******///////////////
 	@Override
@@ -58,11 +62,13 @@ public class StudentService implements StudentServiceImp {
 	
 	@Override
 	public Student create(Student student) {
+		System.out.println(requestmeta.getUserType());
 		return studentRepo.save(student);
 	}
 
 	@Override
 	public List<Student> getAll() {
+		System.out.println(requestmeta.getEmailid());
 		return studentRepo.findAll();
 	}
 
