@@ -9,7 +9,7 @@ public class RequestMeta {
 	
 	private String userNme;
 	
-	private String emailid;
+	private String emailId;
 	
 	private String userType;
 

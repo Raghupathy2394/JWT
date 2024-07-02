@@ -29,14 +29,15 @@ public class JwtInterceptor implements HandlerInterceptor {
 			throws Exception {
 //	System.out.println(request.getRequestURI());
 		String auth = request.getHeader("authorization");
-		if (!(request.getRequestURI().contains("login") || request.getRequestURI().contains("signup"))) {
+		if (!(request.getRequestURI().contains("user") || request.getRequestURI().contains("signup")  )) {
 			Claims claims = jwtToken.verify(auth);
 			requestMeta.setUserNme(claims.get("name").toString());
-			requestMeta.setEmailid(claims.get("emailid").toString());
+			requestMeta.setEmailId(claims.get("emailId").toString());
 			requestMeta.setUserType(claims.get("type").toString());
 			requestMeta.setUserId(Long.valueOf(claims.getIssuer()));
 		}
 //	System.out.println(auth);
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}
+	
 }

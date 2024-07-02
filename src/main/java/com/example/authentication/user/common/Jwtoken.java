@@ -25,11 +25,12 @@ public class Jwtoken {
 		Claims claims=Jwts.claims().setIssuer(user.getId().toString())
 				.setIssuedAt(issuedAt);
  //       Set JWT claims
-	  //  Claims claims = Jwts.claims().setIssuer(String.valueOf(user.getId()));
+	 ///   Claims claims = Jwts.claims().setIssuer(String.valueOf(user.getId()));
 	    claims.setIssuedAt(issuedAt).setExpiration(expiryAt);
 	    claims.put("type", user.getUserType());
 	    claims.put("name", user.getName());
 	    claims.put("emailId", user.getEmailid());
+	    claims.put("password", user.getPassword());
 	   	return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512,secret)
 	   			.compact();
 	}

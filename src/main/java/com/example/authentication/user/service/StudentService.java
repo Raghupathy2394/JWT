@@ -62,13 +62,14 @@ public class StudentService implements StudentServiceImp {
 	
 	@Override
 	public Student create(Student student) {
-		System.out.println(requestmeta.getUserType());
+	
 		return studentRepo.save(student);
 	}
 
 	@Override
 	public List<Student> getAll() {
-		System.out.println(requestmeta.getEmailid());
+		System.out.println(requestmeta.getUserType());
+		System.out.println(requestmeta.getEmailId());
 		return studentRepo.findAll();
 	}
 
